@@ -20,16 +20,19 @@
         .slide { flex: 0 0 100%; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; background: #ffffff; }
         .book-img-wrap { width: 200px; height: 280px; border-radius: 8px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.15); margin-bottom: 32px; background: #e8e4de; display: flex; align-items: center; justify-content: center; }
         .book-info { max-width: 560px; width: 100%; text-align: center; }
+        .book-label { display: inline-block; font-size: 0.75rem; font-weight: 600; color: #2e7d32; background: #e8f5e9; padding: 4px 12px; border-radius: 20px; margin-bottom: 14px; }
+        .book-title { font-family: 'Noto Serif KR', serif; font-size: 1.6rem; font-weight: 700; color: #111; line-height: 1.4; margin-bottom: 8px; }
+        .buy-links { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 24px; }
+        .buy-btn { display: inline-block; padding: 10px 22px; border-radius: 6px; font-size: 0.88rem; font-weight: 700; text-decoration: none; cursor: pointer; }
+        .buy-btn-amazon { background: #FF9900; color: #fff; }
+        .buy-btn-aladin { background: #e74c3c; color: #fff; }
+        .book-desc { font-family: 'Noto Serif KR', serif; font-size: 1rem; color: #444; line-height: 1.9; text-align: left; }
         
-        /* 버튼 위치 배치 및 터치 기능 개선 */
+        /* 화살표 버튼 위치 */
         .slider-arrows { position: absolute; top: 120px; left: 0; right: 0; display: flex; justify-content: space-between; padding: 0 10px; z-index: 5; pointer-events: none; }
-        .arrow-btn { width: 44px; height: 44px; border-radius: 50%; background: #fff; border: 1px solid #ddd; font-size: 1.2rem; color: #555; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; box-shadow: 0 2px 8px rgba(0,0,0,0.06); pointer-events: auto; }
-        .arrow-btn:hover { background: #2e7d32; border-color: #2e7d32; color: #fff; }
-        .arrow-btn.disabled { opacity: 0.3; cursor: default; pointer-events: none; }
-        
-        .slider-dots { display: flex; justify-content: center; gap: 8px; margin-top: 16px; }
-        .dot { width: 8px; height: 8px; border-radius: 50%; background: #ddd; cursor: pointer; transition: all 0.2s ease; }
-        .dot.active { background: #2e7d32; width: 24px; border-radius: 4px; }
+        .arrow-btn { width: 44px; height: 44px; border-radius: 50%; background: #fff; border: 1px solid #ddd; cursor: pointer; display: flex; align-items: center; justify-content: center; pointer-events: auto; }
+        .arrow-btn:hover { background: #2e7d32; color: #fff; }
+        .arrow-btn.disabled { opacity: 0.3; pointer-events: none; }
     </style>
 </head>
 <body>
@@ -41,46 +44,34 @@
             <a href="https://samleestory.blogspot.com">Story</a>
         </nav>
     </header>
-    <div class="page-title"><h1>Sam's Books</h1></div>
     <div class="books-slider-section">
         <div class="slider-container">
             <div class="slider-track" id="sliderTrack">
-                <div class="slide"><div class="book-img-wrap">📖 책 1</div><div class="book-info"><h2>자녀와 함께 읽는 프레임 성경</h2></div></div>
-                <div class="slide"><div class="book-img-wrap">📖 책 2</div><div class="book-info"><h2>FRAME BIBLE</h2></div></div>
+                <div class="slide"><div class="book-img-wrap">📖 프레임 성경</div><div class="book-info"><span class="book-label">Korean</span><h2 class="book-title">자녀와 함께 읽는<br>프레임 성경</h2><div class="book-desc">내용...</div></div></div>
+                <div class="slide"><div class="book-img-wrap">📖 FRAME BIBLE</div><div class="book-info"><span class="book-label">English</span><h2 class="book-title">FRAME BIBLE</h2><div class="book-desc">내용...</div></div></div>
+                <div class="slide"><div class="book-img-wrap">📖 50번의 질문</div><div class="book-info"><span class="book-label">Korean</span><h2 class="book-title">나를 찾아가는<br>50번의 질문</h2><div class="book-desc">내용...</div></div></div>
+                <div class="slide"><div class="book-img-wrap">📖 10번의 깨달음</div><div class="book-info"><span class="book-label">Korean</span><h2 class="book-title">삶을 찾아가는<br>10번의 깨달음</h2><div class="book-desc">내용...</div></div></div>
             </div>
             <div class="slider-arrows">
                 <button class="arrow-btn disabled" id="prevBtn">&#8592;</button>
                 <button class="arrow-btn" id="nextBtn">&#8594;</button>
             </div>
         </div>
-        <div class="slider-dots" id="sliderDots"></div>
     </div>
     <script>
         const track = document.getElementById('sliderTrack');
         const prevBtn = document.getElementById('prevBtn');
         const nextBtn = document.getElementById('nextBtn');
-        const dotsContainer = document.getElementById('sliderDots');
         const slides = track.querySelectorAll('.slide');
         let current = 0;
-
-        slides.forEach((_, i) => {
-            const dot = document.createElement('div');
-            dot.className = 'dot' + (i === 0 ? ' active' : '');
-            dot.addEventListener('click', () => goTo(i));
-            dotsContainer.appendChild(dot);
-        });
-
         function goTo(index) {
             current = Math.max(0, Math.min(index, slides.length - 1));
             track.style.transform = `translateX(-${current * 100}%)`;
-            document.querySelectorAll('.dot').forEach((d, i) => { d.classList.toggle('active', i === current); });
             prevBtn.classList.toggle('disabled', current === 0);
             nextBtn.classList.toggle('disabled', current === slides.length - 1);
         }
-
         prevBtn.addEventListener('click', () => goTo(current - 1));
         nextBtn.addEventListener('click', () => goTo(current + 1));
-
         let startX = 0;
         track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; });
         track.addEventListener('touchend', e => {
