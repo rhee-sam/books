@@ -21,7 +21,6 @@
         .slider-track { display: flex; transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94); will-change: transform; }
         .slide { flex: 0 0 100%; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; background: #ffffff; }
         .book-img-wrap { width: 200px; height: 280px; border-radius: 8px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.15); margin-bottom: 32px; background: #e8e4de; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-        .book-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
         .book-img-placeholder { font-size: 0.85rem; color: #aaa; text-align: center; padding: 20px; line-height: 1.6; }
         .book-info { max-width: 560px; width: 100%; text-align: center; }
         .book-label { display: inline-block; font-size: 0.75rem; font-weight: 600; color: #2e7d32; background: #e8f5e9; padding: 4px 12px; border-radius: 20px; margin-bottom: 14px; }
@@ -30,39 +29,35 @@
         .buy-links { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 24px; }
         .buy-btn { display: inline-block; padding: 10px 22px; border-radius: 6px; font-size: 0.88rem; font-weight: 700; text-decoration: none; transition: all 0.2s ease; cursor: pointer; }
         .buy-btn-amazon { background: #FF9900; color: #fff; }
-        .buy-btn-amazon:hover { background: #e68900; }
         .buy-btn-aladin { background: #e74c3c; color: #fff; }
-        .buy-btn-aladin:hover { background: #c0392b; }
         .buy-btn-kyobo { background: #2c3e50; color: #fff; }
-        .buy-btn-kyobo:hover { background: #1a252f; }
         .buy-btn-coming { background: #f0f0f0; color: #999; cursor: default; border: 1px dashed #ccc; }
         .divider { width: 100%; border: none; border-top: 1px solid #eef0f2; margin: 20px 0; }
         .purchase-info-box { width: 100%; background: #f8f9fa; border-radius: 8px; padding: 20px 24px; margin-bottom: 24px; text-align: left; }
         .section-label { font-size: 0.8rem; font-weight: 700; color: #2e7d32; letter-spacing: 0.5px; margin-bottom: 12px; display: block; }
         .purchase-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #eef0f2; font-size: 0.92rem; }
-        .purchase-row:last-child { border-bottom: none; }
         .purchase-row .label { color: #888; font-weight: 500; }
         .purchase-row .value { color: #111; font-weight: 600; }
         .purchase-row .value.discount { color: #e74c3c; }
         .purchase-row .value.link a { color: #2e7d32; text-decoration: none; font-weight: 700; }
-        .purchase-row .value.link a:hover { text-decoration: underline; }
-        .book-intro-box { width: 100%; text-align: left; }
         .book-desc { font-family: 'Noto Serif KR', serif; font-size: 1rem; color: #444; line-height: 1.9; }
-        .slider-arrows { display: flex; justify-content: center; align-items: center; gap: 20px; margin-top: 24px; }
-        .arrow-btn { width: 44px; height: 44px; border-radius: 50%; background: #fff; border: 1px solid #ddd; font-size: 1.2rem; color: #555; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; box-shadow: 0 2px 8px rgba(0,0,0,0.06); user-select: none; -webkit-tap-highlight-color: transparent; }
+        
+        /* 버튼 위치 배치 수정 */
+        .slider-arrows { position: absolute; top: 150px; left: 0; right: 0; display: flex; justify-content: space-between; padding: 0 10px; z-index: 10; pointer-events: none; }
+        .arrow-btn { width: 44px; height: 44px; border-radius: 50%; background: #fff; border: 1px solid #ddd; font-size: 1.2rem; color: #555; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; box-shadow: 0 2px 8px rgba(0,0,0,0.06); pointer-events: auto; }
         .arrow-btn:hover { background: #2e7d32; border-color: #2e7d32; color: #fff; }
         .arrow-btn.disabled { opacity: 0.3; cursor: default; pointer-events: none; }
+        
         .slider-dots { display: flex; justify-content: center; gap: 8px; margin-top: 16px; }
         .dot { width: 8px; height: 8px; border-radius: 50%; background: #ddd; cursor: pointer; transition: all 0.2s ease; }
         .dot.active { background: #2e7d32; width: 24px; border-radius: 4px; }
-        .book-counter { font-size: 0.85rem; color: #aaa; font-weight: 500; }
         footer { text-align: center; padding: 30px 20px; font-size: 0.85rem; color: #aaa; border-top: 1px solid #eef0f2; background: #fff; }
-        @media (max-width: 600px) { .page-title h1 { font-size: 1.5rem; } .book-img-wrap { width: 160px; height: 224px; } .book-title { font-size: 1.3rem; } .slide { padding: 30px 16px; } .purchase-row { flex-direction: column; align-items: flex-start; gap: 4px; } }
     </style>
 </head>
 <body>
     <header class="header">
         <nav class="header-nav">
+            <a href="/">Home</a>
             <a href="https://samleestory.blogspot.com/p/sam-lee_0542657907.html">About</a>
             <a href="#" class="active">Books</a>
             <a href="https://samleestory.blogspot.com">Story</a>
@@ -76,134 +71,25 @@
     <div class="books-slider-section">
         <div class="slider-container">
             <div class="slider-track" id="sliderTrack">
-
-                <!-- 책 1: 자녀와 함께 읽는 프레임 성경 -->
                 <div class="slide">
-                    <div class="book-img-wrap">
-                        <!-- <img src="여기에_이미지_주소" alt="프레임 성경"> -->
-                        <div class="book-img-placeholder">📖<br>표지 이미지<br>준비 중</div>
-                    </div>
+                    <div class="book-img-wrap"><div class="book-img-placeholder">📖<br>표지 이미지<br>준비 중</div></div>
                     <div class="book-info">
                         <span class="book-label">Korean · 신앙</span>
                         <h2 class="book-title">자녀와 함께 읽는<br>프레임 성경</h2>
                         <p class="book-subtitle">Frame Bible for Families</p>
                         <div class="buy-links">
-                            <a href="여기에_아마존_링크" class="buy-btn buy-btn-amazon" target="_blank">Amazon</a>
-                            <a href="여기에_알라딘_링크" class="buy-btn buy-btn-aladin" target="_blank">알라딘</a>
+                            <a href="#" class="buy-btn buy-btn-amazon">Amazon</a>
+                            <a href="#" class="buy-btn buy-btn-aladin">알라딘</a>
                             <span class="buy-btn buy-btn-coming">교보 준비중</span>
                         </div>
-                        <hr class="divider">
-                        <div class="purchase-info-box">
-                            <span class="section-label">📦 구매 정보</span>
-                            <div class="purchase-row"><span class="label">정가</span><span class="value">여기에 정가 입력</span></div>
-                            <div class="purchase-row"><span class="label">할인가</span><span class="value discount">여기에 할인가 입력</span></div>
-                            <div class="purchase-row"><span class="label">할인율</span><span class="value discount">여기에 할인율 입력</span></div>
-                            <div class="purchase-row"><span class="label">구매처</span><span class="value link"><a href="여기에_구매링크" target="_blank">여기에 구매처 이름</a></span></div>
-                        </div>
-                        <hr class="divider">
-                        <div class="book-intro-box">
-                            <span class="section-label">📝 책 소개</span>
-                            <p class="book-desc">여기에 책 소개 내용을 입력하세요.</p>
-                        </div>
                     </div>
                 </div>
-
-                <!-- 책 2: FRAME BIBLE -->
-                <div class="slide">
-                    <div class="book-img-wrap">
-                        <!-- <img src="여기에_이미지_주소" alt="FRAME BIBLE"> -->
-                        <div class="book-img-placeholder">📖<br>표지 이미지<br>준비 중</div>
-                    </div>
-                    <div class="book-info">
-                        <span class="book-label">English · Faith</span>
-                        <h2 class="book-title">FRAME BIBLE</h2>
-                        <p class="book-subtitle">Read with Your Child</p>
-                        <div class="buy-links">
-                            <a href="여기에_아마존_링크" class="buy-btn buy-btn-amazon" target="_blank">Amazon</a>
-                            <span class="buy-btn buy-btn-coming">Coming Soon</span>
-                        </div>
-                        <hr class="divider">
-                        <div class="purchase-info-box">
-                            <span class="section-label">📦 Purchase Info</span>
-                            <div class="purchase-row"><span class="label">Price</span><span class="value">Enter price here</span></div>
-                            <div class="purchase-row"><span class="label">Discount</span><span class="value discount">Enter discount here</span></div>
-                            <div class="purchase-row"><span class="label">Where to Buy</span><span class="value link"><a href="여기에_구매링크" target="_blank">Enter store name</a></span></div>
-                        </div>
-                        <hr class="divider">
-                        <div class="book-intro-box">
-                            <span class="section-label">📝 About This Book</span>
-                            <p class="book-desc">Enter book description here.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 책 3: 나를 찾아가는 50번의 질문 -->
-                <div class="slide">
-                    <div class="book-img-wrap">
-                        <!-- <img src="여기에_이미지_주소" alt="50번의 질문"> -->
-                        <div class="book-img-placeholder">📖<br>표지 이미지<br>준비 중</div>
-                    </div>
-                    <div class="book-info">
-                        <span class="book-label">Korean · 자기발견</span>
-                        <h2 class="book-title">나를 찾아가는<br>50번의 질문</h2>
-                        <p class="book-subtitle">50 Questions to Find Yourself</p>
-                        <div class="buy-links">
-                            <a href="여기에_알라딘_링크" class="buy-btn buy-btn-aladin" target="_blank">알라딘</a>
-                            <a href="여기에_교보_링크" class="buy-btn buy-btn-kyobo" target="_blank">교보문고</a>
-                        </div>
-                        <hr class="divider">
-                        <div class="purchase-info-box">
-                            <span class="section-label">📦 구매 정보</span>
-                            <div class="purchase-row"><span class="label">정가</span><span class="value">여기에 정가 입력</span></div>
-                            <div class="purchase-row"><span class="label">할인가</span><span class="value discount">여기에 할인가 입력</span></div>
-                            <div class="purchase-row"><span class="label">할인율</span><span class="value discount">여기에 할인율 입력</span></div>
-                            <div class="purchase-row"><span class="label">구매처</span><span class="value link"><a href="여기에_구매링크" target="_blank">여기에 구매처 이름</a></span></div>
-                        </div>
-                        <hr class="divider">
-                        <div class="book-intro-box">
-                            <span class="section-label">📝 책 소개</span>
-                            <p class="book-desc">질문을 주시는 이유는 길을 보여 주시기 위함이었다. 심한 무기력과 더 버틸 수 없다는 마음의 한계에 이르렀을 때, 하나님은 나에게 길을 보여주시는 대신 질문을 주셨다. 나는 길을 잃어버렸다고 생각했다. 그러나 잃어버린 것은 길이 아니라, 나 자신이었다. 내가 나를 잃어버리고 우주가 무슨 소용 있겠는가? 나를 잃어버리는 것은 전부를 잃어버리는 것이다.
- 책 ‘나를 찾아가는 50번의 질문’은 나를 찾아가기 위한 50번의 질문으로 구성되어 있다. 사람의 존재의 고향은 하나님이다. 나를 찾아가는 것은 하나님의 창조의 첫 형상으로 돌아가는 것이다. 그곳에 본래의 내가 있다.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 책 4: 삶을 찾아가는 10번의 깨달음 -->
-                <div class="slide">
-                    <div class="book-img-wrap">
-                        <!-- <img src="여기에_이미지_주소" alt="10번의 깨달음"> -->
-                        <div class="book-img-placeholder">📖<br>표지 이미지<br>준비 중</div>
-                    </div>
-                    <div class="book-info">
-                        <span class="book-label">Korean · 신앙과 삶</span>
-                        <h2 class="book-title">삶을 찾아가는<br>10번의 깨달음</h2>
-                        <p class="book-subtitle">10 Insights to Find Your Life</p>
-                        <div class="buy-links">
-                            <a href="여기에_알라딘_링크" class="buy-btn buy-btn-aladin" target="_blank">알라딘</a>
-                            <a href="여기에_교보_링크" class="buy-btn buy-btn-kyobo" target="_blank">교보문고</a>
-                        </div>
-                        <hr class="divider">
-                        <div class="purchase-info-box">
-                            <span class="section-label">📦 구매 정보</span>
-                            <div class="purchase-row"><span class="label">정가</span><span class="value">여기에 정가 입력</span></div>
-                            <div class="purchase-row"><span class="label">할인가</span><span class="value discount">여기에 할인가 입력</span></div>
-                            <div class="purchase-row"><span class="label">할인율</span><span class="value discount">여기에 할인율 입력</span></div>
-                            <div class="purchase-row"><span class="label">구매처</span><span class="value link"><a href="여기에_구매링크" target="_blank">여기에 구매처 이름</a></span></div>
-                        </div>
-                        <hr class="divider">
-                        <div class="book-intro-box">
-                            <span class="section-label">📝 책 소개</span>
-                            <p class="book-desc">여기에 책 소개 내용을 입력하세요.</p>
-                        </div>
-                    </div>
-                </div>
-
+                <!-- 나머지 슬라이드 추가 영역 -->
             </div>
-        </div>
-        <div class="slider-arrows">
-            <button class="arrow-btn disabled" id="prevBtn">&#8592;</button>
-            <span class="book-counter" id="counter">1 / 4</span>
-            <button class="arrow-btn" id="nextBtn">&#8594;</button>
+            <div class="slider-arrows">
+                <button class="arrow-btn disabled" id="prevBtn">&#8592;</button>
+                <button class="arrow-btn" id="nextBtn">&#8594;</button>
+            </div>
         </div>
         <div class="slider-dots" id="sliderDots"></div>
     </div>
@@ -214,7 +100,6 @@
         const track = document.getElementById('sliderTrack');
         const prevBtn = document.getElementById('prevBtn');
         const nextBtn = document.getElementById('nextBtn');
-        const counter = document.getElementById('counter');
         const dotsContainer = document.getElementById('sliderDots');
         const slides = track.querySelectorAll('.slide');
         const total = slides.length;
@@ -228,19 +113,12 @@
         function goTo(index) {
             current = Math.max(0, Math.min(index, total - 1));
             track.style.transform = `translateX(-${current * 100}%)`;
-            counter.textContent = `${current + 1} / ${total}`;
             document.querySelectorAll('.dot').forEach((d, i) => { d.classList.toggle('active', i === current); });
             prevBtn.classList.toggle('disabled', current === 0);
             nextBtn.classList.toggle('disabled', current === total - 1);
         }
         prevBtn.addEventListener('click', () => goTo(current - 1));
         nextBtn.addEventListener('click', () => goTo(current + 1));
-        let touchStartX = 0;
-        track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
-        track.addEventListener('touchend', e => {
-            const diff = touchStartX - e.changedTouches[0].clientX;
-            if (Math.abs(diff) > 50) { diff > 0 ? goTo(current + 1) : goTo(current - 1); }
-        }, { passive: true });
         goTo(0);
     </script>
 </body>
