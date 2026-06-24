@@ -11,39 +11,18 @@
         .header { background: #fff; border-bottom: 1px solid #eef0f2; padding: 14px 20px; text-align: center; position: sticky; top: 0; z-index: 100; }
         .header-nav { display: flex; justify-content: center; gap: 24px; }
         .header-nav a { font-size: 0.9rem; font-weight: 500; color: #555; text-decoration: none; }
-        .header-nav a:hover { color: #2e7d32; }
         .header-nav a.active { color: #2e7d32; font-weight: 700; }
         .page-title { text-align: center; padding: 50px 20px 30px; }
         .page-title h1 { font-family: 'Noto Serif KR', serif; font-size: 2rem; font-weight: 700; color: #111; margin-bottom: 10px; }
-        .page-title p { font-size: 0.95rem; color: #888; }
         .books-slider-section { max-width: 900px; margin: 0 auto; padding: 0 20px 60px; }
         .slider-container { position: relative; overflow: hidden; border-radius: 12px; }
-        .slider-track { display: flex; transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94); will-change: transform; }
+        .slider-track { display: flex; transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94); will-change: transform; touch-action: pan-y; }
         .slide { flex: 0 0 100%; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; background: #ffffff; }
-        .book-img-wrap { width: 200px; height: 280px; border-radius: 8px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.15); margin-bottom: 32px; background: #e8e4de; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-        .book-img-placeholder { font-size: 0.85rem; color: #aaa; text-align: center; padding: 20px; line-height: 1.6; }
+        .book-img-wrap { width: 200px; height: 280px; border-radius: 8px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.15); margin-bottom: 32px; background: #e8e4de; display: flex; align-items: center; justify-content: center; }
         .book-info { max-width: 560px; width: 100%; text-align: center; }
-        .book-label { display: inline-block; font-size: 0.75rem; font-weight: 600; color: #2e7d32; background: #e8f5e9; padding: 4px 12px; border-radius: 20px; margin-bottom: 14px; }
-        .book-title { font-family: 'Noto Serif KR', serif; font-size: 1.6rem; font-weight: 700; color: #111; line-height: 1.4; margin-bottom: 8px; }
-        .book-subtitle { font-size: 0.95rem; color: #888; margin-bottom: 20px; font-style: italic; }
-        .buy-links { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 24px; }
-        .buy-btn { display: inline-block; padding: 10px 22px; border-radius: 6px; font-size: 0.88rem; font-weight: 700; text-decoration: none; transition: all 0.2s ease; cursor: pointer; }
-        .buy-btn-amazon { background: #FF9900; color: #fff; }
-        .buy-btn-aladin { background: #e74c3c; color: #fff; }
-        .buy-btn-kyobo { background: #2c3e50; color: #fff; }
-        .buy-btn-coming { background: #f0f0f0; color: #999; cursor: default; border: 1px dashed #ccc; }
-        .divider { width: 100%; border: none; border-top: 1px solid #eef0f2; margin: 20px 0; }
-        .purchase-info-box { width: 100%; background: #f8f9fa; border-radius: 8px; padding: 20px 24px; margin-bottom: 24px; text-align: left; }
-        .section-label { font-size: 0.8rem; font-weight: 700; color: #2e7d32; letter-spacing: 0.5px; margin-bottom: 12px; display: block; }
-        .purchase-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #eef0f2; font-size: 0.92rem; }
-        .purchase-row .label { color: #888; font-weight: 500; }
-        .purchase-row .value { color: #111; font-weight: 600; }
-        .purchase-row .value.discount { color: #e74c3c; }
-        .purchase-row .value.link a { color: #2e7d32; text-decoration: none; font-weight: 700; }
-        .book-desc { font-family: 'Noto Serif KR', serif; font-size: 1rem; color: #444; line-height: 1.9; }
         
-        /* 버튼 위치 배치 수정 */
-        .slider-arrows { position: absolute; top: 150px; left: 0; right: 0; display: flex; justify-content: space-between; padding: 0 10px; z-index: 10; pointer-events: none; }
+        /* 버튼 위치 배치 및 터치 기능 개선 */
+        .slider-arrows { position: absolute; top: 120px; left: 0; right: 0; display: flex; justify-content: space-between; padding: 0 10px; z-index: 5; pointer-events: none; }
         .arrow-btn { width: 44px; height: 44px; border-radius: 50%; background: #fff; border: 1px solid #ddd; font-size: 1.2rem; color: #555; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; box-shadow: 0 2px 8px rgba(0,0,0,0.06); pointer-events: auto; }
         .arrow-btn:hover { background: #2e7d32; border-color: #2e7d32; color: #fff; }
         .arrow-btn.disabled { opacity: 0.3; cursor: default; pointer-events: none; }
@@ -51,7 +30,6 @@
         .slider-dots { display: flex; justify-content: center; gap: 8px; margin-top: 16px; }
         .dot { width: 8px; height: 8px; border-radius: 50%; background: #ddd; cursor: pointer; transition: all 0.2s ease; }
         .dot.active { background: #2e7d32; width: 24px; border-radius: 4px; }
-        footer { text-align: center; padding: 30px 20px; font-size: 0.85rem; color: #aaa; border-top: 1px solid #eef0f2; background: #fff; }
     </style>
 </head>
 <body>
@@ -61,30 +39,14 @@
             <a href="https://samleestory.blogspot.com/p/sam-lee_0542657907.html">About</a>
             <a href="#" class="active">Books</a>
             <a href="https://samleestory.blogspot.com">Story</a>
-            <a href="#">Resources</a>
         </nav>
     </header>
-    <div class="page-title">
-        <h1>Sam's Books</h1>
-        <p>살며 사랑하며 배우며 쓴 책들</p>
-    </div>
+    <div class="page-title"><h1>Sam's Books</h1></div>
     <div class="books-slider-section">
         <div class="slider-container">
             <div class="slider-track" id="sliderTrack">
-                <div class="slide">
-                    <div class="book-img-wrap"><div class="book-img-placeholder">📖<br>표지 이미지<br>준비 중</div></div>
-                    <div class="book-info">
-                        <span class="book-label">Korean · 신앙</span>
-                        <h2 class="book-title">자녀와 함께 읽는<br>프레임 성경</h2>
-                        <p class="book-subtitle">Frame Bible for Families</p>
-                        <div class="buy-links">
-                            <a href="#" class="buy-btn buy-btn-amazon">Amazon</a>
-                            <a href="#" class="buy-btn buy-btn-aladin">알라딘</a>
-                            <span class="buy-btn buy-btn-coming">교보 준비중</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- 나머지 슬라이드 추가 영역 -->
+                <div class="slide"><div class="book-img-wrap">📖 책 1</div><div class="book-info"><h2>자녀와 함께 읽는 프레임 성경</h2></div></div>
+                <div class="slide"><div class="book-img-wrap">📖 책 2</div><div class="book-info"><h2>FRAME BIBLE</h2></div></div>
             </div>
             <div class="slider-arrows">
                 <button class="arrow-btn disabled" id="prevBtn">&#8592;</button>
@@ -93,33 +55,38 @@
         </div>
         <div class="slider-dots" id="sliderDots"></div>
     </div>
-    <footer>
-        <p>© Sam Lee · <a href="https://samleestory.blogspot.com" style="color:#2e7d32; text-decoration:none;">samleestory.blogspot.com</a></p>
-    </footer>
     <script>
         const track = document.getElementById('sliderTrack');
         const prevBtn = document.getElementById('prevBtn');
         const nextBtn = document.getElementById('nextBtn');
         const dotsContainer = document.getElementById('sliderDots');
         const slides = track.querySelectorAll('.slide');
-        const total = slides.length;
         let current = 0;
+
         slides.forEach((_, i) => {
             const dot = document.createElement('div');
             dot.className = 'dot' + (i === 0 ? ' active' : '');
             dot.addEventListener('click', () => goTo(i));
             dotsContainer.appendChild(dot);
         });
+
         function goTo(index) {
-            current = Math.max(0, Math.min(index, total - 1));
+            current = Math.max(0, Math.min(index, slides.length - 1));
             track.style.transform = `translateX(-${current * 100}%)`;
             document.querySelectorAll('.dot').forEach((d, i) => { d.classList.toggle('active', i === current); });
             prevBtn.classList.toggle('disabled', current === 0);
-            nextBtn.classList.toggle('disabled', current === total - 1);
+            nextBtn.classList.toggle('disabled', current === slides.length - 1);
         }
+
         prevBtn.addEventListener('click', () => goTo(current - 1));
         nextBtn.addEventListener('click', () => goTo(current + 1));
-        goTo(0);
+
+        let startX = 0;
+        track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; });
+        track.addEventListener('touchend', e => {
+            const diff = startX - e.changedTouches[0].clientX;
+            if (Math.abs(diff) > 50) goTo(current + (diff > 0 ? 1 : -1));
+        });
     </script>
 </body>
 </html>
