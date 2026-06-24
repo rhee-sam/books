@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Sam Lee</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Noto Sans KR', sans-serif; background-color: #f8f9fa; color: #111; min-height: 100vh; }
+
+        /* 헤더 */
+        .header { background: #fff; border-bottom: 1px solid #eef0f2; padding: 14px 20px; text-align: center; position: sticky; top: 0; z-index: 100; }
+        .header-nav { display: flex; justify-content: center; align-items: center; gap: 24px; }
+        .header-nav a { font-size: 0.9rem; font-weight: 500; color: #555; text-decoration: none; }
+        .header-nav a:hover { color: #2e7d32; }
+        .header-nav a.active { color: #2e7d32; font-weight: 700; }
+        .home-btn { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: #f0f0f0; color: #555; font-size: 1rem; text-decoration: none; transition: all 0.2s ease; }
+        .home-btn:hover { background: #2e7d32; color: #fff; }
+
+        /* 히어로 배너 */
+        .hero {
+            background: linear-gradient(135deg, #1a2a3a 0%, #2c3e50 50%, #34495e 100%);
+            color: #fff;
+            text-align: center;
+            padding: 80px 20px 70px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 40px,
+                rgba(255,255,255,0.02) 40px,
+                rgba(255,255,255,0.02) 80px
+            );
+        }
+        .hero h1 {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: 8px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 메인 컨테이너 */
+        .main-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 20px 80px;
+        }
+
+        /* 프로필 섹션 */
+        .profile-section {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+            margin-bottom: 50px;
+        }
+        .profile-img-wrap {
+            flex-shrink: 0;
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            overflow: hidden;
+            background: #e8e4de;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        }
+        .profile-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+        .profile-img-placeholder { font-size: 2.5rem; color: #ccc; }
+        .profile-text h2 {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #111;
+            margin-bottom: 6px;
+        }
+        .profile-text .name-en {
+            font-size: 1rem;
+            color: #888;
+            margin-bottom: 16px;
+            letter-spacing: 1px;
+        }
+        .profile-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        .profile-tag {
+            display: inline-block;
+            font-size: 0.78rem;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 20px;
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        .profile-bio {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 1rem;
+            color: #444;
+            line-height: 1.9;
+        }
+
+        /* 구분선 */
+        .divider {
+            border: none;
+            border-top: 1px solid #eef0f2;
+            margin: 40px 0;
+        }
+
+        /* 콘텐츠 섹션 */
+        .content-section { margin-bottom: 40px; }
+        .content-section h3 {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #2e7d32;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #2e7d32;
+            display: inline-block;
+        }
+
+        /* 저서 목록 */
+        .book-list { list-style: none; }
+        .book-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+        }
+        .book-list li:last-child { border-bottom: none; }
+        .book-num {
+            flex-shrink: 0;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #2e7d32;
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .book-info-wrap { flex: 1; }
+        .book-name {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #111;
+            margin-bottom: 4px;
+        }
+        .book-name-sub {
+            font-size: 0.82rem;
+            color: #888;
+        }
+
+        /* 소명 목록 */
+        .calling-list { list-style: none; }
+        .calling-list li {
+            padding: 10px 0 10px 20px;
+            border-bottom: 1px solid #f0f0f0;
+            font-family: 'Noto Serif KR', serif;
+            font-size: 1rem;
+            color: #444;
+            line-height: 1.6;
+            position: relative;
+        }
+        .calling-list li:last-child { border-bottom: none; }
+        .calling-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #2e7d32;
+            font-size: 1.2rem;
+        }
+
+        /* SNS 링크 */
+        .sns-links {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .sns-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        .sns-blog { background: #f0f4f0; color: #2e7d32; border: 1px solid #c8e6c9; }
+        .sns-blog:hover { background: #2e7d32; color: #fff; }
+        .sns-youtube { background: #fff0f0; color: #e74c3c; border: 1px solid #ffcdd2; }
+        .sns-youtube:hover { background: #e74c3c; color: #fff; }
+        .sns-facebook { background: #f0f2ff; color: #3b5998; border: 1px solid #c5cae9; }
+        .sns-facebook:hover { background: #3b5998; color: #fff; }
+        .sns-email { background: #f5f5f5; color: #555; border: 1px solid #e0e0e0; }
+        .sns-email:hover { background: #555; color: #fff; }
+
+        /* 푸터 */
+        footer { text-align: center; padding: 30px 20px; font-size: 0.85rem; color: #aaa; border-top: 1px solid #eef0f2; background: #fff; }
+
+        /* 모바일 */
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2rem; letter-spacing: 4px; }
+            .hero { padding: 50px 20px; }
+            .profile-section { flex-direction: column; align-items: center; text-align: center; gap: 24px; }
+            .profile-tags { justify-content: center; }
+            .sns-links { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 헤더 -->
+    <header class="header">
+        <nav class="header-nav">
+            <a href="https://samleestory.blogspot.com" class="home-btn" title="홈으로">🏠</a>
+            <a href="#" class="active">About</a>
+            <a href="https://rhee-sam.github.io/books/">Books</a>
+            <a href="https://samleestory.blogspot.com">Story</a>
+            <a href="https://rhee-sam.github.io/books/resources.html">Resources</a>
+        </nav>
+    </header>
+
+    <!-- 히어로 배너 -->
+    <div class="hero">
+        <h1>작 가 소 개</h1>
+    </div>
+
+    <!-- 메인 -->
+    <div class="main-container">
+
+        <!-- 프로필 -->
+        <div class="profile-section">
+            <div class="profile-img-wrap">
+                <!-- 프로필 사진: <img src="여기에_사진_주소" alt="Sam Lee"> -->
+                <div class="profile-img-placeholder">👤</div>
+            </div>
+            <div class="profile-text">
+                <h2>샘 리</h2>
+                <p class="name-en">Sam Lee</p>
+                <div class="profile-tags">
+                    <span class="profile-tag">작가</span>
+                    <span class="profile-tag">목회자</span>
+                    <span class="profile-tag">교육자</span>
+                    <span class="profile-tag">연구자</span>
+                </div>
+                <p class="profile-bio">
+                    <!-- ★ 소개 글 여기에 입력 -->
+                    샘 리는 대한민국에서 태어나 미국으로 이주하였습니다. 현재 캘리포니아의 JU 교회에서 사역하며 신학교에서 리더십을 가르치고 있습니다. 그는 여러 가지 소명을 감당하고 있습니다. 성경 원문을 연구하는 연구자이자, 교회와 지역사회를 신실하게 섬기는 목회자이며, 성도들을 멘토링하고 가르치는 교육자, 깊은 성찰을 담아 글을 쓰는 작가입니다. 또한 두 자녀의 아버지이자 헌신적인 남편으로서 신앙 중심의 가정을 세우기 위해 힘쓰고 있습니다.
+                </p>
+            </div>
+        </div>
+
+        <hr class="divider">
+
+        <!-- 주요 저서 -->
+        <div class="content-section">
+            <h3>주요 저서</h3>
+            <ul class="book-list">
+                <li>
+                    <div class="book-num">1</div>
+                    <div class="book-info-wrap">
+                        <div class="book-name">나를 찾아가는 50번의 질문</div>
+                        <div class="book-name-sub">50 Questions to Find Yourself</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="book-num">2</div>
+                    <div class="book-info-wrap">
+                        <div class="book-name">자녀와 함께 읽는 프레임 성경</div>
+                        <div class="book-name-sub">Frame Bible for Families</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="book-num">3</div>
+                    <div class="book-info-wrap">
+                        <div class="book-name">FRAME BIBLE</div>
+                        <div class="book-name-sub">to read with your child · MY BELOVED BOOK</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="book-num">4</div>
+                    <div class="book-info-wrap">
+                        <div class="book-name">삶을 찾아가는 10번의 깨달음</div>
+                        <div class="book-name-sub">10 Insights to Find Your Life</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="book-num">5</div>
+                    <div class="book-info-wrap">
+                        <div class="book-name">마음 (The Mind)</div>
+                        <div class="book-name-sub">준비중</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="book-num">6</div>
+                    <div class="book-info-wrap">
+                        <div class="book-name">사람을 세우는 사람 시리즈</div>
+                        <div class="book-name-sub">신앙의 단계 연구 · 오락씨는 리더 · 준비중</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <hr class="divider">
+
+        <!-- 소명 -->
+        <div class="content-section">
+            <h3>소명과 사역</h3>
+            <ul class="calling-list">
+                <!-- ★ 소명 내용 여기에 입력 및 추가 -->
+                <li>성경 원문을 연구하는 연구자</li>
+                <li>교회와 지역사회를 신실하게 섬기는 목회자</li>
+                <li>성도들을 멘토링하고 가르치는 교육자</li>
+                <li>깊은 성찰을 담아 글을 쓰는 작가</li>
+                <li>신앙 중심의 가정을 세우는 아버지이자 남편</li>
+            </ul>
+        </div>
+
+        <hr class="divider">
+
+        <!-- SNS / 연락처 -->
+        <div class="content-section">
+            <h3>연결하기</h3>
+            <div class="sns-links">
+                <a href="https://samleestory.blogspot.com" class="sns-btn sns-blog" target="_blank">📝 블로그</a>
+                <a href="유튜브주소" class="sns-btn sns-youtube" target="_blank">▶ YouTube</a>
+                <a href="페이스북주소" class="sns-btn sns-facebook" target="_blank">f Facebook</a>
+                <a href="mailto:이메일주소" class="sns-btn sns-email">✉ Email</a>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>© Sam Lee · <a href="https://samleestory.blogspot.com" style="color:#2e7d32; text-decoration:none;">samleestory.blogspot.com</a></p>
+    </footer>
+
+</body>
+</html>
